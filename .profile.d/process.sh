@@ -1,3 +1,6 @@
+# Process management helpers.
+
+# Kill a process based on a regex search of ps -ef
 function pk() {
     PROC=$(ps -ef|grep -e "$1"|grep -v grep)
     CT=$(printf "$PROC\n"|wc -l)

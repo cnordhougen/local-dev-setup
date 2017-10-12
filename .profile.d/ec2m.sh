@@ -1,3 +1,6 @@
+# Stops ec2metadata if it's already running, then starts it up.
+# Assumes its docker conainer has been built already.
+# Does the time synchronization fix, so no need to run 'ftd' from docker.sh module beforehand.
 function ec2m() {
     docker ps | grep ec2metadata | awk '{ print $1 }' | xargs docker stop
     if [ "$1" != "stop" ]; then

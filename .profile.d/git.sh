@@ -1,3 +1,5 @@
+# Load git completion & add git command aliases
+
 test -f ~/.git-completion.bash && . $_
 
 
