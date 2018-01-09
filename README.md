@@ -12,7 +12,7 @@ This allows aliases & functions to be modularized. Any `.sh` script in `.profile
 ## dnsmasq
 This allows you to set up your system so that arbitrary subdomains of any domain you want can be routed to localhost. For example if you have an API running locally on port 8080, you can do:
 ```
-$ sudo local-ssl-proxy --source=443 --target=8080 &
+$ sudo local-ssl-proxy --source=443 --target=8080
 $ curl -k https://my-api.spslocal.in/
 ```
 
