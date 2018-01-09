@@ -3,8 +3,10 @@ for PROFILE_SCRIPT in $( ls ~/.profile.d/*.sh ); do
 done
 
 alias ls='ls -pFh'
+alias sume="sudo echo 'OK'"
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
+JVM_PATH=/Library/Java/JavaVirtualMachines/
+export JAVA_HOME=$JVM_PATH$(ls -1t $JVM_PATH | tail -n1)Contents/Home
 PATH="/Users/cnordhougen/android-sdk-macosx/platform-tools:$PATH"
 
 # Setting PATH for Python 3.6
