@@ -10,7 +10,7 @@
 // ==/UserScript==
 
 const projects = [
-      'promote-ecr-image-generic',
+        'promote-ecr-image-generic',
         'company-setup',
         'daily-reports',
         'minivan-api',
