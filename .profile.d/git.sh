@@ -6,6 +6,8 @@ alias gcwb='git status|grep "On branch"|grep -Eo "[^ ]+$"'
 alias gs='git status'
 alias gdu='git status|grep '"'"'\t'"'"'|awk '"'"'{ print $1 }'"'"'|xargs rm -rf'
 alias gbls='git branch -l'
+alias grc='git add . && git rebase --continue'
+alias gca='git add . && git commit --amend --no-edit && git push -f'
 
 function gb() {
     REF=$2
@@ -23,11 +25,20 @@ gbrm() {
         BRANCH=$(gcwb)
     fi
 
-    if [[ $BRANCH != master ]]; then
+    CUR_BRANCH=$(gcwb)
+
+    if [[ $BRANCH == $CUR_BRANCH ]]; then
         git checkout master
-        git branch -D $BRANCH
-        git push origin --delete $BRANCH
     fi
+
+    git branch -D $BRANCH
+    git push origin --delete $BRANCH
+}
+
+gbc() {
+    for branch in $(git branch|grep -v '*'|grep -v 'master'); do
+        gbrm $branch
+    done
 }
 
 function gc() {

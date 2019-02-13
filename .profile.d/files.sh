@@ -1,3 +1,38 @@
+# Delete files by type
+function rm_types() {
+    if [ "${1}" == "--dry-run" ]; then
+        IS_DRY_RUN=1
+        LOCATION=$2
+        TYPES=$3
+    else
+        IS_DRY_RUN=0
+        LOCATION=$1
+        TYPES=$2
+    fi
+
+    if [ "${TYPES}" == "" ]; then
+        echo 'USAGE:'
+        echo 'rm-types [--dry-run] LOCATION COMMA_SEPARATED_TYPES'
+        echo '    Find all files, recursively, in LOCATION of the given file types,'
+        echo '    and delete them. If the --dry-run option is given, no files will'
+        echo '    be deleted and instead the list of files that would be deleted will'
+        echo '    be printed out.'
+        echo ''
+        echo 'EXAMPLE:'
+        echo 'rm-types ./foo bak,log'
+    else
+        TYPES=$(echo $TYPES | sed -e 's/, ?/\|/g')
+        for f in $(find -E $1 -regex ".*\.("$TYPES")$"); do
+            if $IS_DRY_RUN; then
+                echo "Dry run: Would delete ${f}"
+            else
+                rm $f
+                echo "Deleted: ${f}"
+            fi
+        done
+    fi
+}
+
 # Mass file rename
 function mren() {
     if [ "$1" == "" ]; then

@@ -1,7 +1,7 @@
 # Process management helpers.
 
 function pse() {
-    ps -ef | grep -e "$1" | grep -v grep | while read P; do
+    ps -efA | grep -e "$1" | grep -v grep | while read P; do
         PID=$(echo $P|awk '{ print $2 }')
         C=$(ps -ef|grep -Po "\d+\s+\d+\s+"$PID".+\d+:\d+.\d+\s+\K.+")
         
